@@ -25,7 +25,7 @@ public class Codec {
         // level-order traversal
         Queue<TreeNode> q = new LinkedList<>();
         // Start with the root node
-        q.offer(root);
+        q.add(root);
 
         // Perform level-order traversal
         while (!q.isEmpty()) {
@@ -43,8 +43,8 @@ public class Codec {
                 sb.append(curNode.val).append(" ");
                 // Push the left and right children
                 // to the queue for further traversal
-                q.offer(curNode.left);
-                q.offer(curNode.right);
+                q.add(curNode.left);
+                q.add(curNode.right);
             }
              return sb.toString();
         }
