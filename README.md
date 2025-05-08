@@ -1,2 +1,2 @@
 # DSA
-this is repository  which in practiced dsa in java
+this is repository  which I solved dsa in java
