@@ -1,17 +1,13 @@
-import java.util.HashSet;
-import java.util.Set;
-
 class Solution {
     public int missingNumber(int[] nums) {
-        Set<Integer> set = new HashSet<>(); // ✅ Correct capitalization of HashSet
-        for (int i = 0; i < nums.length; i++) {
-            set.add(nums[i]);
+        int n = nums.length;
+        int expectedSum = n * (n + 1) / 2;
+        
+        int actualSum = 0;
+        for (int num : nums) {
+            actualSum += num;
         }
-        for (int i = 0; i <= nums.length; i++) {
-            if (!set.contains(i)) { // ✅ Typo fixed: "conatins" → "contains"
-                return i;
-            }
-        }
-        return -1; // Just in case, though logically unreachable
+        
+        return expectedSum - actualSum;
     }
 }
