@@ -1,36 +1,39 @@
 class Solution {
     public int minimumMountainRemovals(int[] nums) {
         int n = nums.length;
-        int[] lis = new int[n]; 
-        int[] lds = new int[n];
+        int[] LIS = new int[n];
+        int[] LDS = new int[n];
 
-        
-        Arrays.fill(lis, 1);
+        // Initialize LIS and LDS arrays to 1
+        Arrays.fill(LIS, 1);
+        Arrays.fill(LDS, 1);
+
+        // Compute LIS for each position
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < i; j++) {
-                if (nums[j] < nums[i]) {
-                    lis[i] = Math.max(lis[i], lis[j] + 1);
+            for (int j = i - 1; j >= 0; j--) {
+                if (nums[i] > nums[j]) {
+                    LIS[i] = Math.max(LIS[i], LIS[j] + 1);
                 }
             }
         }
 
-        
-        Arrays.fill(lds, 1);
+        // Compute LDS for each position
         for (int i = n - 1; i >= 0; i--) {
-            for (int j = n - 1; j > i; j--) {
-                if (nums[j] < nums[i]) {
-                    lds[i] = Math.max(lds[i], lds[j] + 1);
+            for (int j = i + 1; j < n; j++) {
+                if (nums[i] > nums[j]) {
+                    LDS[i] = Math.max(LDS[i], LDS[j] + 1);
                 }
             }
         }
 
-        int maxMountainLen = 0;
-        for (int i = 1; i < n - 1; i++) {
-            if (lis[i] > 1 && lds[i] > 1) {
-                maxMountainLen = Math.max(maxMountainLen, lis[i] + lds[i] - 1);
+        // Calculate minimum removals needed
+        int minRemovals = n;
+        for (int i = 0; i < n; i++) {
+            if (LIS[i] > 1 && LDS[i] > 1) {
+                minRemovals = Math.min(minRemovals, n - LIS[i] - LDS[i] + 1);
             }
         }
 
-        return n - maxMountainLen;
+        return minRemovals;
     }
 }
