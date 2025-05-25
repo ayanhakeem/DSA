@@ -3,11 +3,11 @@ class Solution {
         int sum = 0;
         for (int num : nums) sum += num;
 
-        if (sum % 2 != 0) return false; // Can't partition odd sum equally
+        if (sum % 2 != 0) return false; 
 
         int target = sum / 2;
         boolean[] dp = new boolean[target + 1];
-        dp[0] = true; // Subset sum of 0 is always possible
+        dp[0] = true; 
 
         for (int num : nums) {
             for (int j = target; j >= num; j--) {
