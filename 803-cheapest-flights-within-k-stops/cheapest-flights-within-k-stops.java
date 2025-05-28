@@ -32,20 +32,20 @@ class Solution {
         dist[src] = 0;
 
         // Step 3: Priority Queue for BFS (min-heap based on cost)
-        Queue<Info> pq = new LinkedList<>();
-        pq.add(new Info(src, 0, 0));
+        Queue<Info> q = new LinkedList<>();
+        q.add(new Info(src, 0, 0));
 
-        while (!pq.isEmpty()) {
-            Info curr = pq.poll();
+        while (!q.isEmpty()) {
+            Info curr = q.poll();
             int u = curr.v, costSoFar = curr.cost, stops = curr.stops;
 
-            if (stops > k) continue;
+            if (stops > k) break;
 
             for (Edge e : graph.get(u)) {
                 int v = e.dest, wt = e.wt;
                 if (costSoFar + wt < dist[v]) {
                     dist[v] = costSoFar + wt;
-                    pq.add(new Info(v, dist[v], stops + 1));
+                    q.add(new Info(v, dist[v], stops + 1));
                 }
             }
         }
