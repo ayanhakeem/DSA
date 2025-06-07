@@ -1,16 +1,39 @@
 class Solution {
     public int coinChange(int[] coins, int amount) {
-        int max = amount + 1;  // A value greater than any possible min count
-        int[] dp = new int[amount + 1];
-        Arrays.fill(dp, max);  // Fill with a large value
-        dp[0] = 0;  // Base case: 0 coins needed to make amount 0
+        int n = coins.length;
 
-        for (int coin : coins) {
-            for (int i = coin; i <= amount; i++) {
-                dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+        // Create a 2D array to store results of subproblems
+        int dp[][] = new int[n][amount + 1];
+
+        // Initialize the dp array for the first element of the array
+        for (int i = 0; i <= amount; i++) {
+            if (i % coins[0] == 0)
+                dp[0][i] = i / coins[0];
+            else
+                dp[0][i] = (int) Math.pow(10, 9);
+        }
+
+        // Fill the dp array using dynamic programming
+        for (int ind = 1; ind < n; ind++) {
+            for (int target = 0; target <= amount; target++) {
+                int notTake = 0 + dp[ind - 1][target];
+                int take = (int) Math.pow(10, 9);
+
+                // If the current element is less than or equal to the target, calculate 'take'
+                if (coins[ind] <= target)
+                    take = 1 + dp[ind][target - coins[ind]];
+
+                // Store the minimum result in the dp array
+                dp[ind][target] = Math.min(notTake, take);
             }
         }
 
-        return dp[amount] == max ? -1 : dp[amount];
+        // Get the minimum number of elements needed for the target sum
+        int ans = dp[n - 1][amount];
+
+        // If it's not possible to achieve the target sum, return -1
+        if (ans >= (int) Math.pow(10, 9))
+            return -1;
+        return ans;
     }
 }
