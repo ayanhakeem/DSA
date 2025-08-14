@@ -22,4 +22,4 @@ class Solution {
     }
 }
 //tc=o(n2)
-//sc=o(n)
+//sc=o(1)
