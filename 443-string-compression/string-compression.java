@@ -1,41 +1,33 @@
 class Solution {
     public int compress(char[] chars) {
-
-        // Step 1: Convert char[] to String
-        StringBuilder sb = new StringBuilder();
-        for (char c : chars) {   // fixed loop
-            sb.append(c);
-        }
-        String res = sb.toString(); // e.g., "aaabbcc"
-
-        // Step 2: Compress
-        StringBuilder sb2 = new StringBuilder();
-        int n = res.length();
+        int n = chars.length;
+        int idx = 0; 
         int i = 0;
 
         while (i < n) {
-            char ch = res.charAt(i);   // fixed (was s.charAt)
-            int count = 1;
+            char ch = chars[i];
+            int count = 0;
 
-            while (i < n - 1 && res.charAt(i) == res.charAt(i + 1)) {
+          
+            while (i < n && chars[i] == ch) {
                 i++;
                 count++;
             }
 
-            sb2.append(ch);
+            
+            chars[idx++] = ch;
+
+           
             if (count > 1) {
-                sb2.append(count);
+                String cntStr = String.valueOf(count);
+                for (char c : cntStr.toCharArray()) {
+                    chars[idx++] = c;
+                }
             }
-            i++;
         }
 
-        // Step 3: Copy back compressed string into chars[]
-        String ans = sb2.toString();  // fixed (was sb.toString)
-        int newLen = ans.length();
-        for (int j = 0; j < newLen; j++) {
-            chars[j] = ans.charAt(j);
-        }
-
-        return newLen; // return compressed length
+        return idx; 
     }
 }
+//tc=o(n)
+//sc=o(1)
