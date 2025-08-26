@@ -1,3 +1,38 @@
+class Solution {//optimized
+    public List<List<String>> groupAnagrams(String[] strs) {
+         Map<String, List<String>> map = new HashMap<>();
+        
+        for (String word : strs) {
+            int[] count = new int[26]; // frequency count
+            for (char c : word.toCharArray()) {
+                count[c - 'a']++;
+            }
+            
+            // Build unique key from count array
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 26; i++) {
+                sb.append("#"); // delimiter
+                sb.append(count[i]);
+            }
+            String key = sb.toString();
+            
+            // Group words
+            map.computeIfAbsent(key, k -> new ArrayList<>()).add(word);
+        }
+        
+        return new ArrayList<>(map.values());
+    }
+}
+
+/*Time Complexity: O(N * L)
+Space Complexity: O(N * L)
+*/
+
+
+
+
+
+/*brute fore
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
         Map<String,List<String>>map=new HashMap<>();//sorted str,arraylist
@@ -22,5 +57,5 @@ class Solution {
         return ans;
     }
 }
-//tc=o(nlogn)+o(n)
-//sc=o(n)
+//tc=o(n*l log l)for n string o(l) for to convert array and log l for sort 
+//sc=o(n*l) */
