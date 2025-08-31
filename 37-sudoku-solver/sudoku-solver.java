@@ -31,7 +31,7 @@ class Solution {
     }
 
     private boolean isValid(char[][] board, int row, int col, char c) {
-        for (int i = 0; i < 9; i++) {//0-8
+        for (int i = 0; i < 9; i++) {//0-9
             if (board[i][col] == c) return false; // Check column
             if (board[row][i] == c) return false; // Check row
             if (board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3] == c) return false; // Check 3x3 box
