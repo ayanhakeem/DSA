@@ -6,7 +6,7 @@ class Solution {
         for (char c : s.toCharArray()) {
             // Calculate how many shifts needed to convert c to 'a'
             int shift = (26 - (c - 'a')) % 26;
-            maxShift = Math.max(maxShift, shift);
+            maxShift = Math.max(maxShift, shift);//max why means every char has to reach a if any char has min op to reach a but another ont so take max of both
         }
 
         return maxShift;
@@ -14,3 +14,5 @@ class Solution {
         
     
 }
+//tc=o(n)
+//sc=o(1)
