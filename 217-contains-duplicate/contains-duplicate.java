@@ -1,5 +1,6 @@
 class Solution {
     public boolean containsDuplicate(int[] nums) {
+        
         int n=nums.length;
         Set<Integer>st=new HashSet<>();
         for(int i:nums){
@@ -7,6 +8,5 @@ class Solution {
         }
         if(st.size()!=n) return true;
         else return false;
-        
     }
 }
