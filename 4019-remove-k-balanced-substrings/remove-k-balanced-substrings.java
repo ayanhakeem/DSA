@@ -3,7 +3,7 @@ class Solution {
         StringBuilder str = new StringBuilder();
         int openCount = 0;
 
-        for (char c : s.toCharArray()) {
+        for (char c : s.toCharArray()) {//o(n)
             str.append(c);
             if (c == '(') {
                 openCount++;
@@ -12,7 +12,7 @@ class Solution {
                     int len = str.length();
                     boolean valid = true;
 
-                    for (int i = len - 2 * k; i < len - k; i++) {
+                    for (int i = len - 2 * k; i < len - k; i++) {//o(k)
                         if (str.charAt(i) != '(') {
                             valid = false;
                             break;
