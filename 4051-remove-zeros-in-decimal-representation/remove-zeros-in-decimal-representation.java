@@ -1,24 +1,21 @@
 class Solution {
     public long removeZeros(long n) {
-        Stack<Long>stack=new Stack<>();
-        StringBuilder sb=new StringBuilder();
-        while(n>0){
-            long lastdigit=n%10;
-            n=n/10;
-            if(lastdigit==0){
-                continue;
-
-            }else{
-                stack.push(lastdigit);
+        long result = 0;
+        long multiplier = 1;
+        while (n > 0) {
+            long digit = n % 10;
+            n /= 10;
+            if(digit != 0) {
+                result = digit * multiplier + result;
+                multiplier *= 10;
             }
         }
-        while(!stack.isEmpty()){
-            sb.append(stack.pop());
-        }
-        return Long.parseLong(sb.toString());
-        
+        return result;
     }
+    
 }
+
+
 
 
 
