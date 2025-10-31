@@ -6,7 +6,7 @@ class Solution {
             map.put(i,map.getOrDefault(i,0)+1);
         }
         for(int i:map.keySet()){
-            if(map.get(i)>=2){
+            if(map.get(i)==2){
                 ans.add(i);
             }
         }
