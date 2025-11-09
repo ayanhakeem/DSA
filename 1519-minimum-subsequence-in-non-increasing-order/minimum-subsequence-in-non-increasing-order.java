@@ -1,13 +1,6 @@
 class Solution {
     public List<Integer> minSubsequence(int[] nums) {
         Arrays.sort(nums); // Sort ascending
-
-        // To get descending manually:
-        for (int i = 0; i < nums.length / 2; i++) {
-            int temp = nums[i];
-            nums[i] = nums[nums.length - 1 - i];
-            nums[nums.length - 1 - i] = temp;
-        }
         int totalsum=0;
         int n=nums.length;
 
@@ -16,7 +9,7 @@ class Solution {
         }
         int sum=0;
         ArrayList<Integer>ans=new ArrayList<>();
-        for(int i=0;i<n;i++){
+        for(int i=n-1;i>=0;i--){
             sum+=nums[i];
             ans.add(nums[i]);
             if(sum>totalsum-sum){
