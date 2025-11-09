@@ -18,12 +18,8 @@ class Solution {
         ArrayList<Integer>ans=new ArrayList<>();
         for(int i=0;i<n;i++){
             sum+=nums[i];
+            ans.add(nums[i]);
             if(sum>totalsum-sum){
-                int j=0;
-                while(j<=i){
-                    ans.add(nums[j]);
-                    j++;
-                }
                 break;
             }
         }
