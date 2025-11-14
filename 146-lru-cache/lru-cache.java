@@ -26,11 +26,7 @@ class LRUCache {
 
     public void put(int key, int value) {
         if (map.containsKey(key)) {
-            Node node = map.get(key);
-            node.value = value;
-            remove(node);
-            insert(node);
-            return;
+            remove(map.get(key));//if already exist
         }
         if (map.size() == capacity) {
             remove(tail.prev);  // Remove least recently used node
