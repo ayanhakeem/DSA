@@ -16,7 +16,7 @@ class Solution {
         while(i+1<n && nums[i]<nums[i+1]){
             i++;
         }
-        return i==n-1;
+        return i==n-1;//if it reach last
         
     }
 }
