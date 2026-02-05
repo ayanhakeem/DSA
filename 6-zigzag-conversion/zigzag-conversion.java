@@ -1,46 +1,38 @@
 class Solution {
     public String convert(String s, int numRows) {
-        if (numRows == 1 || s.length() <= numRows)
+        if (numRows == 1 || s.length() <= numRows){//base case
             return s;
-
-        int n = s.length();
-        char[][] mat = new char[numRows][n];
-
-        int row = 0, col = 0;
-        int idx = 0;
-
-        while (idx < n) {
-
-            // 1️⃣ Go DOWN
-            while (row < numRows && idx < n) {
-                mat[row][col] = s.charAt(idx);
-                row++;
-                idx++;
-            }
-
-            row -= 2;   // step back to start diagonal
-            col++;
-
-            // 2️⃣ Go UP diagonally
-            while (row > 0 && idx < n) {
-                mat[row][col] = s.charAt(idx);
-                row--;
-                col++;
-                idx++;
-            }
         }
 
-        // Read row by row
-        StringBuilder ans = new StringBuilder();
-        for (int i = 0; i < numRows; i++) {
-            for (int j = 0; j < n; j++) {
-                if (mat[i][j] != '\0') {
-                    ans.append(mat[i][j]);
-                }
+        int n = numRows;
+        StringBuilder rows[]=new StringBuilder[numRows];
+        for(int i=0;i<n;i++){
+            rows[i]=new StringBuilder();
+        }
+        int row=0;
+        boolean isgoingdown=true;
+
+        for(char c:s.toCharArray()){
+            rows[row].append(c);
+
+
+            if(row==0){
+                isgoingdown=true;
+            }else if(row==n-1){
+                isgoingdown=false;
             }
+
+            row+=isgoingdown?1:-1;
+        }
+
+
+        StringBuilder ans=new StringBuilder();
+        for(StringBuilder r:rows){
+            ans.append(r);
         }
 
         return ans.toString();
     }
 }
+//tc
         
