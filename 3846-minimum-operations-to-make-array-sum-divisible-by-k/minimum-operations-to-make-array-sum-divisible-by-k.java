@@ -6,7 +6,7 @@ class Solution {
             sum+=nums[i];
         }
 
-        if(sum<0) return sum;
+        if(sum<k) return sum;//if sum<k we cant get sum divisible by k
         int op=sum%k;
         return op;
         
@@ -18,3 +18,6 @@ class Solution {
         
     }
 }
+
+//tc=o(n)
+//sc=o(1)
