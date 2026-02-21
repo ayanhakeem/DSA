@@ -1,0 +1,33 @@
+class Solution {
+    static class point implements Comparable<point>{
+        int x;
+        int y;
+        int distsq;
+
+        public point(int x,int y,int distsq){
+            this.x=x;
+            this.y=y;
+            this.distsq=distsq;
+        }
+        @Override
+        public int compareTo(point p2){
+            return this.distsq-p2.distsq;
+        }
+    }
+    public int[][] kClosest(int[][] points, int k) {
+        int n=points.length;
+        PriorityQueue<point>pq=new PriorityQueue<>();
+        for(int i=0;i<n;i++){
+            int distsq=points[i][0]*points[i][0]+points[i][1]*points[i][1];
+            pq.add(new point(points[i][0],points[i][1],distsq));
+
+        }
+        int arr[][]=new int[k][2];
+        for(int i=0;i<k;i++){
+            point p=pq.remove();
+            arr[i][0]=p.x;
+            arr[i][1]=p.y;
+        }
+        return arr;
+    }
+}
