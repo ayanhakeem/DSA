@@ -14,14 +14,12 @@ class Solution {
     }
     public String firstPalindrome(String[] words) {
         int n=words.length;
-        String ans="";
         for(int i=0;i<n;i++){
             if(ispalindrome(words[i])){
-                ans+=words[i];
-                break;
+                return words[i];
             }
         }
-        return ans;
+        return "";
 
     }
 }
