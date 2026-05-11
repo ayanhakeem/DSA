@@ -33,9 +33,17 @@ class Solution {
             Collections.reverse(temp);
             ans.addAll(temp);
         }
-        int[] arr = ans.stream().mapToInt(Integer::intValue).toArray();
+        int arr[]=new int[ans.size()];
+        int k=0;
+        for(int i:ans){
+            arr[k++]=i;
+        }
         return arr;
+
     }
 }
+
+//tc=o(n*l)+o(nlogn)+o(n)
+//sc=o(n)
 
 
