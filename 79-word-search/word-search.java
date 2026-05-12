@@ -30,6 +30,7 @@ class Solution {
             int nc = j + d[1];
 
             if (dfs(nr, nc, k + 1,n,m, board, word)) {
+                board[i][j] = temp;
                 return true;
             }
         }
