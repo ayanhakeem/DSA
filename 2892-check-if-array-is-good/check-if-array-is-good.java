@@ -24,6 +24,7 @@ class Solution {
         if(cnt==2 && set.size()==n-2 && n==max+1 ){
             return true;
         }
+        
 
         return false;
 
