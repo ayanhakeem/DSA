@@ -6,7 +6,7 @@ class Solution {
         int i=n-1;
         long tot=0;
         int usedk=k;
-        while(i>=0 && usedk>0 && mul>1){
+        while(i>=0 && usedk>0 && mul>0){
             long sum=1L*nums[i]*mul;
             mul--;
             usedk--;
