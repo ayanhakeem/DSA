@@ -10,7 +10,7 @@ class Solution {
         int res=end;
         while(st<=end){
             int k=(st+end)/2;
-            long tottime=0;
+            int tottime=0;
             for(int p:piles){
                 tottime += Math.ceil((double) p / k);
             }
@@ -24,3 +24,6 @@ class Solution {
         return res;
     }
 }
+
+//tc=o(n)+o(log(n*log(max)))
+//sc=o(1)
