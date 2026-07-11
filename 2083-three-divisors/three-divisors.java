@@ -1,15 +1,29 @@
 class Solution {
     public boolean isThree(int n) {
         int cnt=0;
-        for(int m=1;m<=n;m++){
-           for(int k=1;k<=n;k++){
-                if(m*k==n) cnt++;
-           } 
+        for(int i=1;i<=n;i++){
+            if(n%i==0){
+                cnt++;
+            }
         }
         return cnt==3;
     }
 }
 
+
+
+
+// class Solution {
+//     public boolean isThree(int n) {
+//         int cnt=0;
+//         for(int m=1;m<=n;m++){
+//            for(int k=1;k<=n;k++){
+//                 if(m*k==n) cnt++;
+//            } 
+//         }
+//         return cnt==3;
+//     }
+// }
 // n=2
 // m=1 k=1 
 // m=1 k=2 a=2 cnt=1
