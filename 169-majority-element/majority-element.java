@@ -13,3 +13,5 @@ class Solution {
        return -1;
     }
 }
+//tc=o(n)+o(n)
+//sc=o(n)
