@@ -1,3 +1,5 @@
+
+
 class Solution {
     public char repeatedCharacter(String s) {
         Set<Character>set=new HashSet<>();
@@ -11,19 +13,6 @@ class Solution {
         return '\0';
     }
 }
+// tc=o(n)
+// sc=o(n)
 
-// class Solution {
-//     public char repeatedCharacter(String s) {
-//         int hash[]=new int[26];
-//         for(int i=0;i<s.length();i++){
-//             hash[s.charAt(i)-'a']++;
-//         }
-
-//         for(int i=0;i<s.length();i++){
-//             if(hash[s.charAt(i)-'a']==2){
-//                 return s.charAt(i);
-//             }
-//         }
-//         return s.charAt(i);
-//     }
-// }
