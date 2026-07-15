@@ -1,5 +1,3 @@
-
-
 class Solution {
     public char repeatedCharacter(String s) {
         Set<Character>set=new HashSet<>();
@@ -10,7 +8,7 @@ class Solution {
                 set.add(s.charAt(i));
             }
         }
-        return '\0';
+        return ' ';
     }
 }
 // tc=o(n)
