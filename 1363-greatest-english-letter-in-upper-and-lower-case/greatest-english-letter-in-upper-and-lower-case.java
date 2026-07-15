@@ -14,12 +14,17 @@ class Solution {
         }
 
         int l=25,r=25;
-        while(l>=0 && r>=0){
-            if(upper[l]>0 && lower[r]>0){
-                return String.valueOf((char)(l+'A'));
+        // while(l>=0 && r>=0){
+        //     if(upper[l]>0 && lower[r]>0){
+        //         return String.valueOf((char)(l+'A'));
+        //     }
+        //     l--;
+        //     r--;
+        // }
+        for (int i = 25; i >= 0; i--) {
+            if (upper[i] > 0 && lower[i] > 0) {
+                return String.valueOf((char)(i + 'A'));
             }
-            l--;
-            r--;
         }
         return "";
     }
