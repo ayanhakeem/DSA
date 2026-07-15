@@ -1,26 +1,24 @@
 class Solution {
     public boolean checkRecord(String s) {
-        int cntA = 0;
-        int cntL = 0;
-
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == 'A') {
-                cntA++;
-                cntL = 0;   // break L streak
-            } else if (s.charAt(i) == 'L') {
-                cntL++;
-            } else {
-                cntL = 0;   // 'P' breaks L streak
+        int n=s.length();
+        int cnta=0;
+        int cntl=0;
+        for(int i=0;i<n;i++){
+            if(s.charAt(i)=='A'){
+                cnta++;
+                cntl=0;
+            }else if(s.charAt(i)=='L'){
+                cntl++;
+            }else{
+                cntl=0;
             }
-
-            if (cntA >= 2 || cntL >= 3) {
-                return false;
-            }
+            if(cnta>=2 || cntl>=3) return false;
         }
-
+        
         return true;
     }
 }
+
 // class Solution {
 //     public boolean checkRecord(String s) {
 //         int n=s.length();
