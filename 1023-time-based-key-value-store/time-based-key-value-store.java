@@ -6,21 +6,24 @@ class TimeMap {
     }
     
     public void set(String key, String value, int timestamp) {
-        if(!map.containsKey(key)){
-            map.put(key,new TreeMap<>());
-        }
-        map.get(key).put(timestamp,value);//insertion o(logn)
+        // if(!map.containsKey(key)){
+        //     map.put(key,new TreeMap<>());
+        // }
+        // map.get(key).put(timestamp,value);//insertion o(logn)
+        map.computeIfAbsent(key,k->new TreeMap<>()).put(timestamp,value);
     }
     
     public String get(String key, int timestamp) {
         if(!map.containsKey(key)) return "";
 
         TreeMap<Integer,String>timestamps=map.get(key);
-        Map.Entry<Integer,String>entry=timestamps.floorEntry(timestamp);//floor entry means largest value<=required timestamp find it
+        Map.Entry<Integer,String>entry=timestamps.floorEntry(timestamp);//floor entry means largest value<=required timestamp find it and o(logn) for search
         return entry==null?"":entry.getValue();
     }
 }
 
+//tc=o(logn)
+//sc=o(m*n)
 
 // public class TimeMap {
 //     private Map<String, Map<Integer, List<String>>> keyStore;
