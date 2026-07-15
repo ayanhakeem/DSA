@@ -1,23 +1,21 @@
 class Solution {
     public int numberOfSpecialChars(String word) {
         int n=word.length();
-        int hash[]=new int[26];
-        
+        int upper[]=new int[26];
+        int lower[]=new int[26];
+
         for(int i=0;i<n;i++){
-            if(Character.isLowerCase(word.charAt(i))){
-                hash[word.charAt(i)-'a']++;
-            }
-           
+          char ch=word.charAt(i);
+          if(Character.isUpperCase(ch)){
+            upper[ch-'A']++;
+          }else if(Character.isLowerCase(ch)){
+            lower[ch-'a']++;
+          }
         }
         int cnt=0;
-        boolean counted[]=new boolean[26];
-        for(int i=0;i<n;i++){
-            if(Character.isUpperCase(word.charAt(i))){
-                int idx=word.charAt(i)-'A';
-                if(hash[idx]>=1 && counted[idx]==false){
-                    cnt++;
-                    counted[idx]=true;
-                }
+        for(int i=0;i<26;i++){
+            if(lower[i]>0 && upper[i]>0){
+                cnt++;
             }
         }
         return cnt;
