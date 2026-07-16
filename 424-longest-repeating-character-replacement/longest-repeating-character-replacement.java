@@ -1,16 +1,16 @@
 class Solution {
     public int characterReplacement(String s, int k) {
-        Map<Character,Integer>map=new HashMap<>();
+        int freq[]=new int[26];
         int n=s.length();
         int res=0;
         int maxf=0;
         int l=0;
         for(int r=0;r<n;r++){
-            map.put(s.charAt(r),map.getOrDefault(s.charAt(r),0)+1);
-            maxf=Math.max(maxf,map.get(s.charAt(r)));
+            freq[s.charAt(r)-'A']++;
+            maxf=Math.max(maxf,freq[s.charAt(r)-'A']);
 
             while((r-l+1)-maxf>k){
-                map.put(s.charAt(l),map.get(s.charAt(l))-1);
+                freq[s.charAt(l)-'A']--;
                 l++;
             }
             res=Math.max(res,r-l+1);
@@ -18,6 +18,8 @@ class Solution {
         return res;
     }
 }
+//tc=o(n)
+//sc=o(n)
 
 // class Solution {
 //     public int characterReplacement(String s, int k) {
