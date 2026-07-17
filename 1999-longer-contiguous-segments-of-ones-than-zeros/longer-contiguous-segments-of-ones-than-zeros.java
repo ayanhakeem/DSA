@@ -7,21 +7,18 @@ class Solution {
             if(s.charAt(i)=='0'){
                 cnt0++;
                 max0=Math.max(max0,cnt0);
+                cnt1=0;
             }else{
+                cnt1++;
+                max1=Math.max(max1,cnt1);
                 cnt0=0;
             }
         }
-        for(int i=0;i<n;i++){
-            if(s.charAt(i)=='1'){
-                cnt1++;
-                max1=Math.max(max1,cnt1);
-            }else{
-                cnt1=0;
-            }
-        }
+        
 
-        if(max1>max0) return true;
-
-        return false;
+        return max1>max0;
     }
 }
+
+//tc=o(n)
+//sc=o(1)
