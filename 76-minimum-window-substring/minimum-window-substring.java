@@ -1,40 +1,60 @@
-class Solution {
-    public String minWindow(String s, String t) {
-        if (s.length() < t.length()) return "";
+import java.util.*;
 
-        int[] need = new int[128];
-        for (char c : t.toCharArray()) {//o(t.length)
-            need[c]++;
+public class Solution {
+    // Function to find the minimum window substring
+    public String minWindow(String s, String t) {
+        // Frequency map for characters in t
+        Map<Character, Integer> targetFreq = new HashMap<>();
+        for (char c : t.toCharArray()) {
+            targetFreq.put(c, targetFreq.getOrDefault(c, 0) + 1);
         }
 
+        // Number of unique characters required to match
+        int required = targetFreq.size();
+
+        // Left and right window pointers
         int left = 0, right = 0;
-        int required = t.length();
+
+        // Tracks how many characters in current window match required frequency
+        int formed = 0;
+
+        // Frequency map for the current window
+        Map<Character, Integer> windowFreq = new HashMap<>();
+
+        // Minimum window length and starting index
         int minLen = Integer.MAX_VALUE;
-        int start = 0;
+        int minLeft = 0;
 
-        while (right < s.length()) {//o(s.length)
+        // Expand the window
+        while (right < s.length()) {
             char c = s.charAt(right);
+            windowFreq.put(c, windowFreq.getOrDefault(c, 0) + 1);
 
-            if (need[c] > 0) required--;
-            need[c]--;
-            right++;
+            // If character matches target frequency
+            if (targetFreq.containsKey(c) && windowFreq.get(c).intValue() == targetFreq.get(c).intValue()) {
+                formed++;
+            }
 
-            while (required == 0) {
-                if (right - left < minLen) {
-                    minLen = right - left;
-                    start = left;
+            // Try shrinking the window if all target characters matched
+            while (left <= right && formed == required) {
+                if ((right - left + 1) < minLen) {
+                    minLen = right - left + 1;
+                    minLeft = left;
                 }
 
                 char leftChar = s.charAt(left);
-                need[leftChar]++;
-                if (need[leftChar] > 0) required++;
+                windowFreq.put(leftChar, windowFreq.get(leftChar) - 1);
+
+                if (targetFreq.containsKey(leftChar) && windowFreq.get(leftChar) < targetFreq.get(leftChar)) {
+                    formed--;
+                }
+
                 left++;
             }
+
+            right++;
         }
 
-        return minLen == Integer.MAX_VALUE ? "" 
-                                           : s.substring(start, start + minLen);
+        return minLen == Integer.MAX_VALUE ? "" : s.substring(minLeft, minLeft + minLen);
     }
 }
-//tc=o(n
-//sc=o(1)
