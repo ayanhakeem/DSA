@@ -8,3 +8,5 @@ class Solution {
        return p; 
     }
 }
+//tc=o(nlogn)
+//sc=o(1)
