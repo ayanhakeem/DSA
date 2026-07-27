@@ -11,7 +11,7 @@ class Solution {
         }
         @Override
         public int compareTo(point p2){
-            return this.distsq-p2.distsq;
+            return p2.distsq-this.distsq;
         }
     }
     public int[][] kClosest(int[][] points, int k) {
@@ -19,8 +19,11 @@ class Solution {
         PriorityQueue<point>pq=new PriorityQueue<>();
         for(int i=0;i<n;i++){
             int distsq=points[i][0]*points[i][0]+points[i][1]*points[i][1];
-            pq.add(new point(points[i][0],points[i][1],distsq));
+             pq.add(new point(points[i][0],points[i][1],distsq));
 
+            if(pq.size()>k){
+                pq.remove();
+            }
         }
         int arr[][]=new int[k][2];
         for(int i=0;i<k;i++){
