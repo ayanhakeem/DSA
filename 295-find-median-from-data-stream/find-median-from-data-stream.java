@@ -1,23 +1,23 @@
 class MedianFinder {
-    PriorityQueue<Integer>max=new PriorityQueue<>();
-    PriorityQueue<Integer>min=new PriorityQueue<>(Collections.reverseOrder());
+    PriorityQueue<Integer>min=new PriorityQueue<>();//right min heap
+    PriorityQueue<Integer>max=new PriorityQueue<>(Collections.reverseOrder());//left max heap
 
     public MedianFinder() {
         
     }
     
     public void addNum(int num) {
-        max.offer(num);
-        min.offer(max.poll());
-        if(min.size()>max.size()){
+        max.offer(num);//add into left max heap
+        min.offer(max.poll());//add into right min heap for balance
+        if(min.size()>max.size()){//we have to maintain max right heap > than right min heap of diff 1
             max.offer(min.poll());
         }
         
     }
     
     public double findMedian() {
-        if(max.size()>min.size()) return max.peek();
-        return (max.peek()+min.peek())/2.0d;
+        if(max.size()>min.size()) return max.peek();//if odd count or means if maintain left max heap > greater than right min heap of diff 1 not more tgan diff 1
+        return (max.peek()+min.peek())/2.0d;//if even count
         
     }
 }
