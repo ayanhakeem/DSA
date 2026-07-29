@@ -1,13 +1,14 @@
 class Solution {
     public int busyStudent(int[] startTime, int[] endTime, int queryTime) {
-        int n=startTime.length;
+        int i=0,j=0;
         int cnt=0;
-        for(int i=0;i<n;i++){
-            if(startTime[i]<=queryTime && endTime[i]>=queryTime){
+        while(i<startTime.length && j<endTime.length){
+            if(startTime[i]<=queryTime && endTime[j]>=queryTime){
                 cnt++;
             }
+            i++;
+            j++;
         }
         return cnt;
-        
     }
 }
