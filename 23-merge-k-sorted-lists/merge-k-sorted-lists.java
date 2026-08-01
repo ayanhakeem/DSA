@@ -10,35 +10,29 @@
  */
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-      
-        // Priority queue that sorts nodes by their value
-        PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparingInt(node -> node.val));
-
-        // Add the head of each list to the priority queue
-        for (ListNode node : lists) {
-            if (node != null) {
-                pq.add(node);
+        List<Integer>arr=new ArrayList<>();
+        for(int i=0;i<lists.length;i++){
+            ListNode temp=lists[i];
+            while(temp!=null){
+                arr.add(temp.val);
+                temp=temp.next;
             }
+
         }
 
-        // Dummy node to help build the result list
-        ListNode dummy = new ListNode(0);
-        ListNode temp = dummy;
+        Collections.sort(arr);
 
-        // Process nodes in the priority queue
-        while (!pq.isEmpty()) {
-            ListNode minNode = pq.poll(); // Get the node with the smallest value
-            temp.next = minNode;          // Attach it to the result list
-            temp = temp.next;             // Move the tail
-
-            // If there is a next node, add it to the queue
-            if (minNode.next != null) {
-                pq.add(minNode.next);
-            }
+        //convert to listnode
+        ListNode dummy=new ListNode(-1);
+        ListNode curr=dummy;
+        for(int val:arr){
+            curr.next=new ListNode(val);
+            curr=curr.next;
         }
 
-        return dummy.next; // Return the head of the merged list
+        return dummy.next;
+
+
+
     }
 }
-//tc=O(N*K*log k)
-//sc=o(k)
