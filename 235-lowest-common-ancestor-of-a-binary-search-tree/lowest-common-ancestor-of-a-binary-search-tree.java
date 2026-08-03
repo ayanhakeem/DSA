@@ -8,22 +8,43 @@
  * }
  */
 
-class Solution {
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if(root==null) return null;
-        int curr=root.val;
-        if(curr<p.val && curr<q.val){
-            return lowestCommonAncestor(root.right, p,  q);
+// class Solution {
+//     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+//         if(root==null) return null;
+//         int curr=root.val;
+//         if(curr<p.val && curr<q.val){
+//             return lowestCommonAncestor(root.right, p,  q);
 
-        }
-        if(curr>p.val && curr>q.val){
-            return lowestCommonAncestor(root.left, p,  q);
-        }
+//         }
+//         if(curr>p.val && curr>q.val){
+//             return lowestCommonAncestor(root.left, p,  q);
+//         }
         
-        return root;
+//         return root;
         
+//     }
+// }
+
+public class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        TreeNode cur = root;
+
+        while (cur != null) {
+            if (p.val > cur.val && q.val > cur.val) {
+                cur = cur.right;
+            } else if (p.val < cur.val && q.val < cur.val) {
+                cur = cur.left;
+            } else {
+                return cur;
+            }
+        }
+        return null;
     }
 }
+
+
+
+
 
 /**
  * Definition for a binary tree node.
