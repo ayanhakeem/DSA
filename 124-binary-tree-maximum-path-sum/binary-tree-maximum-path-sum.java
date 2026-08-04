@@ -21,7 +21,7 @@ class Solution {
         int leftsum=Math.max(0,maxpathdown(node.left,maxvalue));//handle negatives
         int rightsum=Math.max(0,maxpathdown(node.right,maxvalue));
         maxvalue[0]=Math.max(maxvalue[0],node.val+leftsum+rightsum);
-        return Math.max(leftsum,rightsum)+node.val;
+        return Math.max(leftsum,rightsum)+node.val;//it returns only 1 sided path sum becoz parent cant take 2 braches sum so max between leftsum and right sum with curr return we want max sum path
     }
     public int maxPathSum(TreeNode root) {
         int maxvalue[]=new int[1];
@@ -32,3 +32,6 @@ class Solution {
         
     }
 }
+
+//tc=o(n)
+//sc=o(h)
