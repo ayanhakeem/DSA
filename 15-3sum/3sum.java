@@ -1,35 +1,36 @@
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>>res=new ArrayList<>();
-        Arrays.sort(nums);
-        int sum=0;
-        for(int i=0;i<nums.length;i++){
-            if(i>0 && nums[i]==nums[i-1]){//dublicate meand repeted skip 
-                continue;
-            }
-            int j=i+1;
-            int k=nums.length-1;
-            while(j<k){
-                int t=nums[i]+nums[j]+nums[k];
+         Arrays.sort(nums);
+         int n=nums.length;
+        // Store final result
+        List<List<Integer>> ans = new ArrayList<>();
 
-                if(t<0){
-                    j++;
-                }else if(t>0){
-                    k--;
-                }else{
-                    res.add(Arrays.asList(nums[i],nums[j],nums[k]));
-                    j++;
-                    k--;
+        // First loop for first element
+        for (int i = 0; i < n; i++) {
+            // Skip duplicates for first element
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
 
-                    while(nums[j]==nums[j-1] && j<k){
-                        j++;//skip dulbicate
-                    }
-                    while(nums[k]==nums[k+1] && j<k){
-                        k--;//skip dulbicate
-                    }
+            // Two pointers
+            int left = i + 1, right = n - 1;
+
+            // Find pairs for current arr[i]
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+
+                if (sum == 0) {
+                    ans.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    left++;
+                    right--;
+
+                    // Skip duplicates for left
+                    while (left < right && nums[left] == nums[left - 1]) left++;
+                    // Skip duplicates for right
+                    while (left < right && nums[right] == nums[right + 1]) right--;
                 }
-            } 
+                else if (sum < 0) left++;
+                else right--;
+            }
         }
-        return res;
+        return ans;
     }
 }
