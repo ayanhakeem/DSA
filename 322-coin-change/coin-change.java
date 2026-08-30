@@ -1,41 +1,47 @@
+import java.util.*;
+
 class Solution {
+
     public int coinChange(int[] coins, int amount) {
+
         int n = coins.length;
+        int INF = (int) 1e9;
 
-    
-        int prev[]=new int[amount+1];
-        int curr[]=new int[amount+1];
+        int[] prev = new int[amount + 1];
 
-        // Initialize the dp array for the first element of the array
-        for (int i = 0; i <= amount; i++) {
-            if (i % coins[0] == 0)//handle for 0th idx
-                prev[i] = i / coins[0];
-            else
-                prev[i] = (int) Math.pow(10, 9);
-        }
-
-        // Fill the dp array using dynamic programming
-        for (int ind = 1; ind < n; ind++) {
-            for (int target = 0; target <= amount; target++) {
-                int notTake = 0 + prev[target];
-                int take = (int) Math.pow(10, 9);
-
-                // If the current element is less than or equal to the target, calculate 'take'
-                if (coins[ind] <= target)
-                    take = 1 +curr[target - coins[ind]];
-
-                // Store the minimum result in the dp array
-                curr[target] = Math.min(notTake, take);
+        // Base case: idx = 0
+        for (int target = 0; target <= amount; target++) {
+            if (target % coins[0] == 0) {
+                prev[target] = target / coins[0];
+            } else {
+                prev[target] = INF;
             }
-            prev = curr.clone();
         }
 
-        // Get the minimum number of elements needed for the target sum
-        int ans = prev[amount];
+        // For remaining coins
+        for (int idx = 1; idx < n; idx++) {
 
-        // If it's not possible to achieve the target sum, return -1
-        if (ans >= (int) Math.pow(10, 9))
-            return -1;
-        return ans;
+            int[] curr = new int[amount + 1];
+
+            for (int target = 0; target <= amount; target++) {
+
+                // NOT PICK → previous row
+                int notPick = prev[target];
+
+                // PICK → current row
+                int pick = INF;
+
+                if (coins[idx] <= target) {
+                    pick = 1 + curr[target - coins[idx]];
+                }
+
+                curr[target] = Math.min(pick, notPick);
+            }
+
+            // Move current row to previous row
+            prev = curr;
+        }
+
+        return prev[amount] >= INF ? -1 : prev[amount];
     }
 }
