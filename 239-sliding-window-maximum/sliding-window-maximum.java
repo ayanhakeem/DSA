@@ -10,16 +10,16 @@ class Solution {
         Deque < Integer > q = new ArrayDeque < > ();
         for (int i = 0; i < nums.length; i++) {
             // remove numbers out of range k
-            if (!q.isEmpty() && q.peek() == i - k) {
+            if (!q.isEmpty() && q.peekFirst() == i - k) {//or peek() can use
                 q.poll();
             }
-            // remove smaller numbers in k range as they are useless
+            // remove smaller numbers in k range as they are useless in boundry
             while (!q.isEmpty() && nums[q.peekLast()] < nums[i]) {
                 q.pollLast();
             }
 
             q.offer(i);
-            if (i >= k - 1) {
+            if (i >= k - 1) {//starting of sliding window
                 r[ri++] = nums[q.peek()];
             }
         }
