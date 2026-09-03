@@ -4,11 +4,11 @@ class Solution {
         int n=nums.length;
         int nge[]=new int[n];
         for(int i=2*n-1;i>=0;i--){
-            while(s.isEmpty()==false && s.peek()<=nums[i%n]){
+            while(!s.isEmpty() && s.peek()<=nums[i%n]){
                 s.pop();
             }
             if(i<n){
-                if(s.isEmpty()==false) nge[i]=s.peek();
+                if(!s.isEmpty()) nge[i]=s.peek();
                 else nge[i]=-1;
             }
             s.push(nums[i%n]);
