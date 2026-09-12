@@ -15,22 +15,8 @@
  */
 class Solution {
     public boolean checkTree(TreeNode root) {
-        // Base case: if node is null or it's a leaf node, return true
-        if (root == null || (root.left == null && root.right == null)) {
-            return true;
-        }
+        if(root==null) return true;
 
-        // If only one child is missing, the property fails (unless it's a leaf)
-        if (root.left == null || root.right == null) {
-            return false;
-        }
-
-        // Check if current node's value equals the sum of its children's values
-        if (root.val == root.left.val + root.right.val) {
-            // Recursively check left and right subtrees
-            return checkTree(root.left) && checkTree(root.right);
-        } else {
-            return false;
-        }
+        return (root.left.val+root.right.val==root.val);
     }
 }
